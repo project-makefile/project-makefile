@@ -2025,6 +2025,7 @@ wagtail-init-default: db-init wagtail-install wagtail-start
 	@$(MAKE) pip-init-test
 	@$(MAKE) readme
 	@$(MAKE) gitignore
+	@$(MAKE) freeze
 	@$(MAKE) serve
 
 wagtail-install-default:
