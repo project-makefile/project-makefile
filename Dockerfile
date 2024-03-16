@@ -1,7 +1,7 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
 FROM amazonlinux:2023
 
-RUN dnf install -y shadow-utils python3.11 python3.11-pip
+RUN dnf install -y shadow-utils python3.11 python3.11-pip make nodejs22
 
 # Add user that will be used in the container.
 RUN useradd wagtail
