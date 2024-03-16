@@ -1998,6 +1998,7 @@ wagtail-start-default:
 	wagtail start backend .
 
 wagtail-init-default: db-init wagtail-install wagtail-start
+	@echo "$$DOCKERFILE" > Dockerfile
 	export SETTINGS=backend/settings/base.py DEV_SETTINGS=backend/settings/dev.py; \
 		$(MAKE) django-settings
 	export URLS=urls.py; \
