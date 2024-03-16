@@ -1,8 +1,8 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.8.1-slim-buster
+FROM public.ecr.aws/amazonlinux/amazonlinux:2023
 
 # Add user that will be used in the container.
-RUN useradd wagtail
+RUN /sbin/useradd wagtail
 
 # Port used by this container to serve HTTP.
 EXPOSE 8000
