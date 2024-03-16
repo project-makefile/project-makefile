@@ -1035,6 +1035,10 @@ const App = () => (
 root.render(<App />);
 endef
 
+define GIT_IGNORE
+__pycache__
+*.pyc
+endef
 
 define HTML_FOOTER
 {% load wagtailcore_tags %}
