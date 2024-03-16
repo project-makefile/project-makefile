@@ -49,6 +49,8 @@ COPY --chown=wagtail:wagtail . .
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
+RUN make pack
+
 # Collect static files.
 RUN python3.11 manage.py collectstatic --noinput --clear
 
