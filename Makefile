@@ -554,45 +554,18 @@ define CONTACT_PAGE_LANDING
 {% block content %}<div class="container"><h1>Thank you!</h1></div>{% endblock %}
 endef
 
-define DOCKER_FILE
-FROM node:20-alpine as build-node
-FROM python:3.12-bullseye as build-python
-RUN useradd wagtail
-EXPOSE 8000
-ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
-RUN curl -fsSL https://deb.nodesource.com/setup_21.x | bash - 
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-    build-essential \
-    libpq-dev \
-    libjpeg62-turbo-dev \
-    zlib1g-dev \
-    libwebp-dev \
-    nodejs \
- && rm -rf /var/lib/apt/lists/*
-RUN pip install -U pip
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
-WORKDIR /app
-RUN chown wagtail:wagtail /app
-COPY --chown=wagtail:wagtail . .
-RUN make django-npm-install django-npm-build
-RUN python manage.py collectstatic --noinput --clear
-CMD set -xe; python manage.py migrate --noinput; gunicorn backend.wsgi:application
-endef
+define DOCKERFILE
+# Use a base image
+FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
 
-define GIT_IGNORE
-bin/
-__pycache__
-lib/
-lib64
-pyvenv.cfg
-node_modules/
-share/
-static/
-media/
-.elasticbeanstalk/
-dist/
+# Set the working directory
+WORKDIR /app
+
+# Copy the source code into the container
+COPY . .
+
+# Define the command to run when the container starts
+CMD ["echo", "Hello, World!"]
 endef
 
 
@@ -1496,7 +1469,7 @@ export CONTACT_PAGE_MODEL
 export CONTACT_PAGE_TEMPLATE
 export CONTACT_PAGE_LANDING
 export CONTACT_PAGE_TEST
-export DOCKER_FILE
+export DOCKERFILE
 export ESLINTRC
 export FAVICON_TEMPLATE
 export FRONTEND_APP
