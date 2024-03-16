@@ -33,7 +33,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 # Install the project requirements.
 COPY requirements.txt /
-RUN pip3.11 install -r /requirements.txt
+RUN python3.11 -m pip install -r /requirements.txt
 
 # Use /app folder as a directory where the source code is stored.
 WORKDIR /app
