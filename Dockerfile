@@ -1,7 +1,7 @@
 # Use an official Python runtime based on Debian 10 "buster" as a parent image.
 FROM amazonlinux:2023
 
-RUN dnf install -y shadow-utils python3.11 python3-pip
+RUN dnf install -y shadow-utils python3.11 python3.11-pip
 
 # Add user that will be used in the container.
 RUN useradd wagtail
@@ -50,7 +50,7 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 
 # Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+RUN python3.11 manage.py collectstatic --noinput --clear
 
 # Runtime command that executes when "docker run" is called, it does the
 # following:
