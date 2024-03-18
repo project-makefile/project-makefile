@@ -11,4 +11,4 @@ COPY --chown=wagtail:wagtail . .
 USER wagtail
 RUN cd frontend; npm-20 install; npm-20 run build
 RUN python3.11 manage.py collectstatic --noinput --clear
-CMD set -xe; python manage.py migrate --noinput; gunicorn backend.wsgi:application
+CMD set -xe; python3.11 manage.py migrate --noinput; gunicorn backend.wsgi:application
