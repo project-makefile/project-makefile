@@ -49,7 +49,7 @@ COPY --chown=wagtail:wagtail . .
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
 
-RUN make pack
+RUN cd frontend; npm-20 install; npm-20 run build
 
 # Collect static files.
 RUN python3.11 manage.py collectstatic --noinput --clear

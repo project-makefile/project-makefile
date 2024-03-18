@@ -556,7 +556,7 @@ endef
 
 define DOCKERFILE
 FROM amazonlinux:2023
-RUN dnf install -y shadow-utils python3.11 python3.11-pip make nodejs
+RUN dnf install -y shadow-utils python3.11 python3.11-pip make nodejs20-npm
 RUN useradd wagtail
 EXPOSE 8000
 ENV PYTHONUNBUFFERED=1 PORT=8000
