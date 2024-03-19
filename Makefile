@@ -1040,6 +1040,8 @@ endef
 define GIT_IGNORE
 __pycache__
 *.pyc
+dist/
+node_modules/
 endef
 
 define HTML_FOOTER
