@@ -2109,7 +2109,7 @@ jenkins-init-default:
 webpack-init-default: npm-init
 	@echo "$$WEBPACK_CONFIG_JS" > webpack.config.js
 	$(GIT_ADD) webpack.config.js
-	npm install --save-dev webpack webpack-cli
+	npm install --save-dev webpack webpack-cli webpack-dev-server
 	$(ADD_DIR) src/
 	@echo "$$WEBPACK_INDEX_JS" > src/index.js
 	$(GIT_ADD) src/index.js
