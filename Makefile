@@ -2000,6 +2000,7 @@ readme-build-default:
 
 reveal-init-default: webpack-reveal-init
 	npm install reveal.js
+	jq '.scripts += {"build": "webpack"}' package.json > tmp.json && mv tmp.json package.json
 
 sphinx-init-default:
 	$(MAKE) sphinx-install
