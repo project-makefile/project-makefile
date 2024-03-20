@@ -1483,15 +1483,21 @@ endef
 
 define WEBPACK_INDEX_REVEAL_HTML
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello, Webpack!</title>
-</head>
-<body>
-  <script src="dist/bundle.js"></script>
-</body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pillow + ASWF</title>
+        <link rel="stylesheet" href="dist/bundle.css">
+    </head>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Title Slide -->
+            <section>
+				Slide 1
+			</section>
+		</div>
+	</div>
 </html>
 endef
 
@@ -1994,6 +2000,7 @@ readme-build-default:
 
 reveal-init-default: webpack-reveal-init
 	npm install reveal.js
+	npm run env --package-json scripts.build="webpack"
 
 sphinx-init-default:
 	$(MAKE) sphinx-install
