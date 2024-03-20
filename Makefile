@@ -1593,7 +1593,7 @@ eb-logs-default:
 npm-init-default:
 	npm init -y
 	$(GIT_ADD) package.json
-	$(GIT_ADD) package-lock.json
+	-$(GIT_ADD) package-lock.json
 
 npm-build-default:
 	npm run build
