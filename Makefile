@@ -1943,7 +1943,7 @@ readme-open-default:
 readme-build-default:
 	rst2pdf README.rst
 
-reveal-default: webpack-init
+reveal-init-default: webpack-init
 	npm install revealjs
 
 sphinx-init-default:
@@ -2205,6 +2205,7 @@ pack-default: django-npm-build
 pg-init-default: db-pg-init
 readme-default: readme-init
 restart-default: eb-restart
+reveal-default: reveal-init
 s-default: serve
 sdist-default: python-setup-sdist
 secret-default: django-secret
