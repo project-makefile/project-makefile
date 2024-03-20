@@ -1943,6 +1943,9 @@ readme-open-default:
 readme-build-default:
 	rst2pdf README.rst
 
+reveal-default: webpack-init
+	npm install revealjs
+
 sphinx-init-default:
 	$(MAKE) sphinx-install
 	sphinx-quickstart -q -p $(PROJECT_NAME) -a $(USER) -v 0.0.1 $(RANDIR)
