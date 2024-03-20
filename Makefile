@@ -1481,7 +1481,26 @@ define WEBPACK_INDEX_HTML
 </html>
 endef
 
+define WEBPACK_INDEX_REVEAL_HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello, Webpack!</title>
+</head>
+<body>
+  <script src="dist/bundle.js"></script>
+</body>
+</html>
+endef
+
 define WEBPACK_INDEX_JS
+const message = "Hello, World!";
+console.log(message);
+endef
+
+define WEBPACK_INDEX_REVEAL_JS
 const message = "Hello, World!";
 console.log(message);
 endef
@@ -1973,7 +1992,7 @@ readme-open-default:
 readme-build-default:
 	rst2pdf README.rst
 
-reveal-init-default: webpack-init
+reveal-init-default: webpack-reveal-init
 	npm install reveal.js
 
 sphinx-init-default:
@@ -2168,6 +2187,17 @@ webpack-init-default: npm-init
 	@echo "$$WEBPACK_INDEX_JS" > src/index.js
 	$(GIT_ADD) src/index.js
 	@echo "$$WEBPACK_INDEX_HTML" > index.html
+	$(GIT_ADD) index.html
+	$(MAKE) gitignore
+
+webpack-reveal-init-default: npm-init
+	@echo "$$WEBPACK_CONFIG_REVEAL_JS" > webpack.config.js
+	$(GIT_ADD) webpack.config.js
+	npm install --save-dev webpack webpack-cli webpack-dev-server
+	$(ADD_DIR) src/
+	@echo "$$WEBPACK_INDEX_REVEAL_JS" > src/index.js
+	$(GIT_ADD) src/index.js
+	@echo "$$WEBPACK_INDEX_REVEAL_HTML" > index.html
 	$(GIT_ADD) index.html
 	$(MAKE) gitignore
 
