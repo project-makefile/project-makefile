@@ -1625,6 +1625,28 @@ db-pg-export-default:
 db-pg-import-default:
 	@psql $(DATABASE_NAME) < $(DATABASE_NAME).sql
 
+django-frontend-app-default: python-webpack-init
+	$(ADD_DIR) frontend/src/context
+	$(ADD_DIR) frontend/src/images
+	$(ADD_DIR) frontend/src/utils
+	@echo "$$COMPONENT_CLOCK" > frontend/src/components/Clock.js
+	@echo "$$COMPONENT_ERROR" > frontend/src/components/ErrorBoundary.js
+	@echo "$$FRONTEND_CONTEXT_INDEX" > frontend/src/context/index.js
+	@echo "$$FRONTEND_CONTEXT_USER_PROVIDER" > frontend/src/context/UserContextProvider.js
+	@echo "$$COMPONENT_USER_MENU" > frontend/src/components/UserMenu.js
+	@echo "$$FRONTEND_APP" > frontend/src/application/app.js
+	@echo "$$FRONTEND_APP_CONFIG" > frontend/src/application/config.js
+	@echo "$$FRONTEND_COMPONENTS" > frontend/src/components/index.js
+	@echo "$$FRONTEND_PORTAL" > frontend/src/dataComponents.js
+	@echo "$$FRONTEND_STYLES" > frontend/src/styles/index.scss
+	@echo "$$BABELRC" > frontend/.babelrc
+	@echo "$$ESLINTRC" > frontend/.eslintrc
+	@echo "$$THEME_BLUE" > frontend/src/styles/theme-blue.scss
+	@echo "$$THEME_TOGGLER" > frontend/src/utils/themeToggler.js
+	@echo "$$TINYMCE_JS" > frontend/src/utils/tinymce.js
+	-$(GIT_ADD) home
+	-$(GIT_ADD) frontend
+
 django-secret-default:
 	python -c "from secrets import token_urlsafe; print(token_urlsafe(50))"
 
@@ -1833,10 +1855,18 @@ help-default:
             | xargs | tr ' ' '\n' \
             | awk '{printf "%s\n", $$0}' ; done | less # http://stackoverflow.com/a/26339924
 
+jenkins-init-default:
+	@echo "$$JENKINS_FILE" > Jenkinsfile
+
 lint-default:
 	-ruff check -v --fix
 	-ruff format -v
 	djlint --reformat --format-css --format-js .
+
+make-default:
+	$(GIT_ADD) Makefile
+	-git commit -a -m "Add/update project-makefile files"
+	-git push
 
 pip-freeze-default:
 	$(ENSURE_PIP)
@@ -1882,6 +1912,10 @@ pip-uninstall-default:
 	$(ENSURE_PIP)
 	python -m pip freeze | xargs python -m pip uninstall -y
 
+project-mk-default:
+	touch project.mk
+	$(GIT_ADD) project.mk
+
 python-serve-default:
 	@echo "\n\tServing HTTP on http://0.0.0.0:8000\n"
 	python3 -m http.server
@@ -1891,6 +1925,9 @@ python-setup-sdist-default:
 
 python-webpack-init-default:
 	python manage.py webpack_init --no-input
+
+rand-default:
+	@openssl rand -base64 12 | sed 's/\///g'
 
 readme-init-default:
 	@echo "$(PROJECT_NAME)" > README.rst
@@ -1912,6 +1949,13 @@ sphinx-init-default:
 	mv $(RANDIR)/* .
 	rmdir $(RANDIR)
 
+review-default:
+ifeq ($(UNAME), Darwin)
+	$(REVIEW_EDITOR) `find backend/ -name \*.py` `find backend/ -name \*.html` `find frontend/ -name \*.js` `find frontend/ -name \*.js`
+else
+	@echo "Unsupported"
+endif
+
 sphinx-install-default:
 	echo "Sphinx\n" > requirements.txt
 	@$(MAKE) pip-install
@@ -1926,6 +1970,13 @@ sphinx-build-pdf-default:
 
 sphinx-serve-default:
 	cd _build/html;python3 -m http.server
+
+usage-default:
+	@echo "Project Makefile 🤷"
+	@echo "Usage: make [options] [target] ..."
+	@echo "Examples:"
+	@echo "   make help    Print all targets"
+	@echo "   make usage   Print this message"
 
 wagtail-search-urls:
 	@echo "$$SEARCH_URLS" > search/urls.py
@@ -1974,28 +2025,6 @@ wagtail-backend-templates-default:
 	@echo "$$HTML_FOOTER" > backend/templates/footer.html
 	@echo "$$HTML_OFFCANVAS" > backend/templates/offcanvas.html
 	$(GIT_ADD) backend/templates/
-
-django-frontend-app-default: python-webpack-init
-	$(ADD_DIR) frontend/src/context
-	$(ADD_DIR) frontend/src/images
-	$(ADD_DIR) frontend/src/utils
-	@echo "$$COMPONENT_CLOCK" > frontend/src/components/Clock.js
-	@echo "$$COMPONENT_ERROR" > frontend/src/components/ErrorBoundary.js
-	@echo "$$FRONTEND_CONTEXT_INDEX" > frontend/src/context/index.js
-	@echo "$$FRONTEND_CONTEXT_USER_PROVIDER" > frontend/src/context/UserContextProvider.js
-	@echo "$$COMPONENT_USER_MENU" > frontend/src/components/UserMenu.js
-	@echo "$$FRONTEND_APP" > frontend/src/application/app.js
-	@echo "$$FRONTEND_APP_CONFIG" > frontend/src/application/config.js
-	@echo "$$FRONTEND_COMPONENTS" > frontend/src/components/index.js
-	@echo "$$FRONTEND_PORTAL" > frontend/src/dataComponents.js
-	@echo "$$FRONTEND_STYLES" > frontend/src/styles/index.scss
-	@echo "$$BABELRC" > frontend/.babelrc
-	@echo "$$ESLINTRC" > frontend/.eslintrc
-	@echo "$$THEME_BLUE" > frontend/src/styles/theme-blue.scss
-	@echo "$$THEME_TOGGLER" > frontend/src/utils/themeToggler.js
-	@echo "$$TINYMCE_JS" > frontend/src/utils/tinymce.js
-	-$(GIT_ADD) home
-	-$(GIT_ADD) frontend
 
 wagtail-start-default:
 	wagtail start backend .
@@ -2098,17 +2127,6 @@ wagtail-install-default:
         whitenoise \
         xhtml2pdf
 
-
-usage-default:
-	@echo "Project Makefile 🤷"
-	@echo "Usage: make [options] [target] ..."
-	@echo "Examples:"
-	@echo "   make help    Print all targets"
-	@echo "   make usage   Print this message"
-
-jenkins-init-default:
-	@echo "$$JENKINS_FILE" > Jenkinsfile
-
 webpack-init-default: npm-init
 	@echo "$$WEBPACK_CONFIG_JS" > webpack.config.js
 	$(GIT_ADD) webpack.config.js
@@ -2119,25 +2137,6 @@ webpack-init-default: npm-init
 	@echo "$$WEBPACK_INDEX_HTML" > index.html
 	$(GIT_ADD) index.html
 	$(MAKE) gitignore
-
-make-default:
-	$(GIT_ADD) Makefile
-	-git commit -a -m "Add/update project-makefile files"
-	-git push
-
-rand-default:
-	@openssl rand -base64 12 | sed 's/\///g'
-
-review-default:
-ifeq ($(UNAME), Darwin)
-	$(REVIEW_EDITOR) `find backend/ -name \*.py` `find backend/ -name \*.html` `find frontend/ -name \*.js` `find frontend/ -name \*.js`
-else
-	@echo "Unsupported"
-endif
-
-project-mk-default:
-	touch project.mk
-	$(GIT_ADD) project.mk
 
 wagtail-contactpage-default:
 	python manage.py startapp contactpage
