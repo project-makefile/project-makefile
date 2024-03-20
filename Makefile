@@ -1440,6 +1440,33 @@ module.exports = {
 };
 endef
 
+define WEBPACK_CONFIG_REVEAL_JS
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+module.exports = {
+  mode: 'development',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'bundle.css',
+    }),
+  ],
+};
+endef
+
 define WEBPACK_INDEX_HTML
 <!DOCTYPE html>
 <html lang="en">
@@ -1516,8 +1543,11 @@ export THEME_BLUE
 export THEME_TOGGLER
 export TINYMCE_JS
 export WEBPACK_CONFIG_JS
+export WEBPACK_CONFIG_REVEAL_JS
 export WEBPACK_INDEX_HTML
+export WEBPACK_INDEX_REVEAL_HTML
 export WEBPACK_INDEX_JS
+export WEBPACK_INDEX_REVEAL_JS
 
 # ------------------------------------------------------------------------------  
 # Rules
