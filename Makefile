@@ -1944,7 +1944,7 @@ readme-build-default:
 	rst2pdf README.rst
 
 reveal-init-default: webpack-init
-	npm install revealjs
+	npm install reveal.js
 
 sphinx-init-default:
 	$(MAKE) sphinx-install
