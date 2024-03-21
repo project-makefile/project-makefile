@@ -17,5 +17,5 @@ jobs:
           ls ${{ github.workspace }}
       - name: Run make
         run: |
-		  make h | cat
+		  make
       - run: echo "🍏 This job's status is ${{ job.status }}."
