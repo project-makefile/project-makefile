@@ -2007,16 +2007,16 @@ sphinx-init-default: sphinx-install
 
 sphinx-theme-init-default:
 	THEME_NAME := $(PROJECT_NAME)_theme
-	$(ADD_DIR)  $(THEME_NAME)
-	$(ADD_FILE) $(THEME_NAME)/theme.conf
-	$(GIT_ADD)  $(THEME_NAME)/theme.conf
-	$(ADD_FILE) $(THEME_NAME)/layout.html
-	$(GIT_ADD)  $(THEME_NAME)/layout.html
-	$(ADD_DIR)  $(THEME_NAME)/static/css
-	$(ADD_FILE) $(THEME_NAME)/static/css/style.css
-	$(ADD_DIR)  $(THEME_NAME)/static/js
-	$(ADD_FILE) $(THEME_NAME)/static/js/script.js
-	$(GIT_ADD)  $(THEME_NAME)/static
+	$(ADD_DIR)  $THEME_NAME
+	$(ADD_FILE) $THEME_NAME/theme.conf
+	$(GIT_ADD)  $THEME_NAME/theme.conf
+	$(ADD_FILE) $THEME_NAME/layout.html
+	$(GIT_ADD)  $THEME_NAME/layout.html
+	$(ADD_DIR)  $THEME_NAME/static/css
+	$(ADD_FILE) $THEME_NAME/static/css/style.css
+	$(ADD_DIR)  $THEME_NAME/static/js
+	$(ADD_FILE) $THEME_NAME/static/js/script.js
+	$(GIT_ADD)  $THEME_NAME/static
 
 review-default:
 ifeq ($(UNAME), Darwin)
