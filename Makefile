@@ -1984,13 +1984,20 @@ python-webpack-init-default:
 rand-default:
 	@openssl rand -base64 12 | sed 's/\///g'
 
-readme-init-default:
+readme-init-rst-default:
 	@echo "$(PROJECT_NAME)" > README.rst
 	@echo "================================================================================" >> README.rst
 	-@git add README.rst
 
-readme-edit-default:
+readme-init-md-default:
+	@echo "# $(PROJECT_NAME)" > README.md
+	@echo "================================================================================" >> README.rst
+
+readme-edit-rst-default:
 	vi README.rst
+
+readme-edit-md-default:
+	vi README.md
 
 readme-open-default:
 	open README.pdf
@@ -2247,7 +2254,7 @@ django-clean-default: wagtail-clean
 django-init-default: wagtail-init
 djlint-default: lint-djlint
 e-default: edit
-edit-default: readme-edit
+edit-default: readme-edit-md
 empty-default: git-commit-empty
 freeze-default: pip-freeze
 git-commit-edit-push-default: git-commit-edit git-push
@@ -2270,7 +2277,7 @@ open-default: django-open
 p-default: git-push
 pack-default: django-npm-build
 pg-init-default: db-pg-init
-readme-default: readme-init
+readme-default: readme-init-md
 restart-default: eb-restart
 reveal-default: reveal-init
 s-default: serve
