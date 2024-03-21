@@ -1991,7 +1991,7 @@ readme-init-rst-default:
 
 readme-init-md-default:
 	@echo "# $(PROJECT_NAME)" > README.md
-	@echo "================================================================================" >> README.rst
+	-@git add README.md
 
 readme-edit-rst-default:
 	vi README.rst
