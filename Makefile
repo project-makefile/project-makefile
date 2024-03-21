@@ -2003,11 +2003,14 @@ sphinx-init-default:
 sphinx-init-theme-default:
 	$(ADD_DIR) $(PROJECT_NAME)_theme
 	$(ADD_FILE) theme.conf
+	$(GIT_ADD) theme.conf
 	$(ADD_FILE) layout.html
+	$(GIT_ADD) layout.html
 	$(ADD_DIR) static/css
 	$(ADD_FILE) static/css/style.css
 	$(ADD_DIR) static/js
 	$(ADD_FILE) static/js/script.js
+	$(GIT_ADD) static
 
 review-default:
 ifeq ($(UNAME), Darwin)
