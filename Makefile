@@ -24,17 +24,23 @@ WAGTAIL_CLEAN_FILES = README.rst .dockerignore Dockerfile manage.py requirements
 
 REVIEW_EDITOR = subl
 
-GIT_BRANCHES = $(shell git branch -a | grep remote | grep -v HEAD | grep -v main | grep -v master)
+GIT_BRANCHES = $(shell git branch -a | grep remote | grep -v HEAD | grep -v main |\
+    grep -v master)
 GIT_MESSAGE = "Update $(PROJECT_NAME)"
 GIT_COMMIT = git commit -a -m $(GIT_MESSAGE)
 GIT_PUSH = git push
 
-GET_DATABASE_URL = eb ssh -c "source /opt/elasticbeanstalk/deployment/custom_env_var; env | grep DATABASE_URL"
+GET_DATABASE_URL = eb ssh -c "source /opt/elasticbeanstalk/deployment/custom_env_var;\
+    env | grep DATABASE_URL"
 DATABASE_AWK = awk -F\= '{print $$2}'
-DATABASE_HOST = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) | python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["HOST"])')
-DATABASE_NAME = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) | python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["NAME"])')
-DATABASE_PASS = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) | python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["PASSWORD"])')
-DATABASE_USER = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) | python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["USER"])')
+DATABASE_HOST = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) |\
+    python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["HOST"])')
+DATABASE_NAME = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) |\
+    python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["NAME"])')
+DATABASE_PASS = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) |\
+    python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["PASSWORD"])')
+DATABASE_USER = $(shell $(GET_DATABASE_URL) | $(DATABASE_AWK) |\
+    python -c 'import dj_database_url; url = input(); url = dj_database_url.parse(url); print(url["USER"])')
 
 ENV_NAME ?= $(PROJECT_NAME)-$(GIT_BRANCH)-$(GIT_REV)
 INSTANCE_MAX ?= 1
