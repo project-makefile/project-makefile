@@ -62,6 +62,7 @@ GIT_REV := $(shell git rev-parse --short HEAD)
 GIT_BRANCH := $(shell git branch --show-current)
 
 ADD_DIR := mkdir -pv
+ADD_FILE := touch
 COPY_DIR := cp -rv
 COPY_FILE := cp -v
 DEL_DIR := rm -rv
@@ -1998,6 +1999,15 @@ sphinx-init-default:
 	sphinx-quickstart -q -p $(PROJECT_NAME) -a $(USER) -v 0.0.1 $(RANDIR)
 	mv $(RANDIR)/* .
 	rmdir $(RANDIR)
+
+sphinx-init-theme-default:
+	$(ADD_DIR) $(PROJECT_NAME)_theme
+	$(ADD_FILE) theme.conf
+	$(ADD_FILE) layout.html
+	$(ADD_DIR) static/css
+	$(ADD_FILE) static/css/style.css
+	$(ADD_DIR) static/js
+	$(ADD_FILE) static/js/script.js
 
 review-default:
 ifeq ($(UNAME), Darwin)
