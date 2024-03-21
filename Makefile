@@ -2005,7 +2005,7 @@ sphinx-init-default: sphinx-install
 	git checkout Makefile
 	$(MAKE) gitignore
 
-sphinx-init-theme-default:
+sphinx-theme-init-default:
 	THEME_NAME := $(PROJECT_NAME)_theme
 	$(ADD_DIR)  $(THEME_NAME)
 	$(ADD_FILE) $(THEME_NAME)/theme.conf
