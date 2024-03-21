@@ -1913,15 +1913,15 @@ pip-freeze-default:
 	$(ENSURE_PIP)
 	python -m pip freeze | sort > $(TMPDIR)/requirements.txt
 	mv -f $(TMPDIR)/requirements.txt .
-	$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) requirements.txt
 
 pip-init-default:
 	touch requirements.txt
-	$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) requirements.txt
 
 pip-init-test-default:
 	@echo "$$REQUIREMENTS_TEST" > requirements-test.txt
-	$(GIT_ADD) requirements-test.txt
+	-$(GIT_ADD) requirements-test.txt
 
 pip-install-default:
 	$(ENSURE_PIP)
@@ -2031,7 +2031,7 @@ sphinx-install-default:
 	echo "Sphinx\n" > requirements.txt
 	@$(MAKE) pip-install
 	@$(MAKE) pip-freeze
-	$(GIT_ADD) requirements.txt
+	-$(GIT_ADD) requirements.txt
 
 sphinx-build-default:
 	sphinx-build -b html -d _build/doctrees . _build/html
