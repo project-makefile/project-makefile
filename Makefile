@@ -1027,6 +1027,7 @@ __pycache__
 *.pyc
 dist/
 node_modules/
+_build/
 endef
 
 define HTML_FOOTER
@@ -2001,6 +2002,7 @@ sphinx-init-default: sphinx-install
 	$(GIT_ADD) index.rst
 	$(GIT_ADD) conf.py
 	$(DEL_FILE) make.bat
+	$(MAKE) gitignore
 	git checkout Makefile
 
 sphinx-init-theme-default:
