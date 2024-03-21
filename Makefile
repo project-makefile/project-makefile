@@ -2002,7 +2002,7 @@ sphinx-init-default: sphinx-install
 	$(GIT_ADD) index.rst
 	$(GIT_ADD) conf.py
 	$(DEL_FILE) make.bat
-	$(MAKE) gitignore
+	$(MAKE) git-ignore
 	git checkout Makefile
 
 sphinx-init-theme-default:
