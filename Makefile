@@ -2008,6 +2008,8 @@ sphinx-init-default: sphinx-install
 sphinx-theme-init-default:
 	export THEME_NAME=$(PROJECT_NAME)_theme; \
 	$(ADD_DIR) $$THEME_NAME ; \
+	$(ADD_FILE) $$THEME_NAME/__init__.py ; \
+	$(GIT_ADD) $$THEME_NAME/__init__.py ; \
 	$(ADD_FILE) $$THEME_NAME/theme.conf ; \
 	$(GIT_ADD) $$THEME_NAME/theme.conf ; \
 	$(ADD_FILE) $$THEME_NAME/layout.html ; \
