@@ -1992,7 +1992,7 @@ readme-build-default:
 	rst2pdf README.rst
 
 reveal-init-default: webpack-reveal-init
-	npm install reveal.js
+	npm install reveal.js mini-css-extract-plugin
 	jq '.scripts += {"build": "webpack"}' package.json > \
         $(TMPDIR)/tmp.json && mv $(TMPDIR)/tmp.json package.json
 	jq '.scripts += {"start": "webpack serve --mode development --port 8000 --static"}' package.json > \
