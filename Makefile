@@ -2007,7 +2007,8 @@ reveal-init-default: webpack-reveal-init
         $(TMPDIR)/tmp.json && mv $(TMPDIR)/tmp.json package.json
 
 reveal-serve-default:
-	npm run start
+	npm run watch &
+	python -m http.server
 
 sphinx-init-default: sphinx-install
 	sphinx-quickstart -q -p $(PROJECT_NAME) -a $(USER) -v 0.0.1 $(RANDIR)
