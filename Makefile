@@ -1484,8 +1484,8 @@ define WEBPACK_REVEAL_INDEX_HTML
             <section>
                 Slide 2: Draw the rest of the owl
             </section>
-		</div>
-	</div>
+        </div>
+    </div>
 </html>
 endef
 
