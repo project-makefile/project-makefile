@@ -1479,11 +1479,11 @@ define WEBPACK_REVEAL_INDEX_HTML
     <div class="reveal">
         <div class="slides">
             <section>
-				Slide 1: Draw some circles
-			</section>
+                Slide 1: Draw some circles
+            </section>
             <section>
-				Slide 2: Draw the rest of the owl
-			</section>
+                Slide 2: Draw the rest of the owl
+            </section>
 		</div>
 	</div>
 </html>
