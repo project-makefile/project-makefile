@@ -1993,6 +1993,9 @@ readme-open-default:
 readme-build-default:
 	rst2pdf README.rst
 
+reveal-build-default:
+	npm run build
+
 reveal-init-default: webpack-reveal-init
 	npm install \
        css-loader \
