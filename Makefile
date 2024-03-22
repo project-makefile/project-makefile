@@ -1426,7 +1426,7 @@ module.exports = {
 };
 endef
 
-define WEBPACK_CONFIG_REVEAL_JS
+define WEBPACK_REVEAL_CONFIG_JS
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -1467,7 +1467,7 @@ define WEBPACK_INDEX_HTML
 </html>
 endef
 
-define WEBPACK_INDEX_REVEAL_HTML
+define WEBPACK_REVEAL_INDEX_HTML
 <!DOCTYPE html>
 <html>
     <head>
@@ -1492,7 +1492,7 @@ const message = "Hello, World!";
 console.log(message);
 endef
 
-define WEBPACK_INDEX_REVEAL_JS
+define WEBPACK_REVEAL_INDEX_JS
 const message = "Hello, World!";
 console.log(message);
 endef
@@ -1554,11 +1554,11 @@ export THEME_BLUE
 export THEME_TOGGLER
 export TINYMCE_JS
 export WEBPACK_CONFIG_JS
-export WEBPACK_CONFIG_REVEAL_JS
 export WEBPACK_INDEX_HTML
-export WEBPACK_INDEX_REVEAL_HTML
 export WEBPACK_INDEX_JS
-export WEBPACK_INDEX_REVEAL_JS
+export WEBPACK_REVEAL_CONFIG_JS
+export WEBPACK_REVEAL_INDEX_HTML
+export WEBPACK_REVEAL_INDEX_JS
 
 # ------------------------------------------------------------------------------  
 # Rules
@@ -2218,13 +2218,13 @@ webpack-init-default: npm-init
 	$(MAKE) gitignore
 
 webpack-reveal-init-default: npm-init
-	@echo "$$WEBPACK_CONFIG_REVEAL_JS" > webpack.config.js
+	@echo "$$WEBPACK_REVEAL_CONFIG_JS" > webpack.config.js
 	$(GIT_ADD) webpack.config.js
 	npm install --save-dev webpack webpack-cli webpack-dev-server
 	$(ADD_DIR) src/
-	@echo "$$WEBPACK_INDEX_REVEAL_JS" > src/index.js
+	@echo "$$WEBPACK_REVEAL_INDEX_JS" > src/index.js
 	$(GIT_ADD) src/index.js
-	@echo "$$WEBPACK_INDEX_REVEAL_HTML" > index.html
+	@echo "$$WEBPACK_REVEAL_INDEX_HTML" > index.html
 	$(GIT_ADD) index.html
 	$(MAKE) gitignore
 
