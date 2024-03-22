@@ -1486,6 +1486,7 @@ define WEBPACK_REVEAL_INDEX_HTML
             </section>
         </div>
     </div>
+    <script src="dist/bundle.js"></script>
 </html>
 endef
 
