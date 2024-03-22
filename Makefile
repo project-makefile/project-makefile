@@ -1473,14 +1473,16 @@ define WEBPACK_REVEAL_INDEX_HTML
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pillow + ASWF</title>
+        <title>Project Makefile</title>
         <link rel="stylesheet" href="dist/bundle.css">
     </head>
     <div class="reveal">
         <div class="slides">
-            <!-- Slide 1: Title Slide -->
             <section>
-				Slide 1
+				Slide 1: Draw some circles
+			</section>
+            <section>
+				Slide 2: Draw the rest of the owl
 			</section>
 		</div>
 	</div>
