@@ -1993,7 +1993,15 @@ readme-build-default:
 
 reveal-init-default: webpack-reveal-init
 	npm install reveal.js
-	jq '.scripts += {"build": "webpack"}' package.json > tmp.json && mv tmp.json package.json
+	jq '.scripts += {"build": "webpack"}' package.json > \
+        $(TMPDIR)/tmp.json && mv $(TMPDIR)/tmp.json package.json
+	jq '.scripts += {"start": "webpack serve --mode development --port 8000 --static"}' package.json > \
+        $(TMPDIR)/tmp.json && mv $(TMPDIR)/tmp.json package.json
+	jq '.scripts += {"watch": "webpack watch --mode development"}' package.json > \
+        $(TMPDIR)/tmp.json && mv $(TMPDIR)/tmp.json package.json
+
+reveal-serve-default:
+	npm run start
 
 sphinx-init-default: sphinx-install
 	sphinx-quickstart -q -p $(PROJECT_NAME) -a $(USER) -v 0.0.1 $(RANDIR)
